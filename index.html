@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="favicon" href="favicon.ico" />
+    <!-- Primary Meta Tags -->
+    <title>Get your certificate of GenAI Study Jam 2024</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+        }
+        h1 {
+            font-weight: 600;
+            color: #1a73e8;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        .signature {
+            font-weight: 600;
+            text-align: right;
+            color: #1a73e8;
+        }
+    </style>
+
+    <meta
+      name="title"
+      content="Get your certificate of GenAI Study Jam"
+    />
+   
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <img src="logo-gcjs.svg" alt="Logo" />
+
+  
+      <h3>
+        <a
+          href="https://gdsc.community.dev/amity-university-gurugram/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >GenAI Study Jam 2023 - GDSC AUH</a
+        >
+      </h3>
+    </header>
+    <main>
+      <label for="name">Your Registerd Email</label>
+
+      <input
+        required
+        type="email"
+        name="email"
+        autocomplete="name"
+        placeholder="Enter Your Email"
+        id="email"
+      />
+      <button onclick="search()">Click Here to Download Certificate</button>
+    </main>
+    <div class="container">
+      <h1>Farewell Message</h1>
+      <p>Dear GDSC Community,</p>
+      <p>As my tenure as a GDSC Lead ends, I want to take a moment to reflect on this incredible journey we've shared this past year. Leading this community has been one of the most fulfilling experiences of my life, filled with learning, growth, and a shared passion for technology.</p>
+      <p>We've built something truly special together—a community where innovation thrives, ideas flourish, and everyone supports one another. From our Info Session to GenAI Study Jam, the enthusiasm and commitment of each member have inspired me every day. I still remember our community encouraging each other to complete the Cloud Jam milestones and the amazing comments on my YouTube uploads.</p>
+      <p>I am deeply grateful for the friendships I've made, the knowledge we've exchanged, and the challenges we've overcome together. Your dedication to learning, growing, and helping each other is what makes this community so remarkable.</p>
+      <p>Though my time as the GDSC Lead has come to an end, my belief in the power of this community remains strong. I am confident that GDSC will continue to thrive, innovate, and make a meaningful impact under new leadership (still to be announced). I encourage you all to keep pushing the boundaries, embracing challenges, and supporting one another as you always have.</p>
+      <p>Thank you for the trust, the memories, and the opportunity to lead such an inspiring group of individuals. I look forward to seeing the amazing things that lie ahead for GDSC.</p>
+      <p>If there’s anything Vishesh Vaibhav as a person can do for you, feel free to text me, you know where to reach me.</p>
+      <p>Although, I’ve still not left behind as a member, we’re yet to complete the bootcamp, remember?</p>
+      <p class="signature">Signing off one last time,<br>Vishesh Vaibhav<br>Former GDSC Lead</p>
+  </div>
+
+  
+
+
+
+    <script>
+
+
+
+
+function search() {
+  const email = document.getElementById("email").value;
+  const jsonFile = "data.json";
+
+  fetch(jsonFile)
+    .then((response) => response.json())
+    .then((data) => {
+      let foundData = null;
+
+      for (let i = 0; i < data.length; i++) {
+        if (data[i]["Student Email"] === email ) {
+          foundData = data[i];
+          break;
+        }
+      }
+
+      if (foundData) {
+        validateData(foundData["Student Name"], foundData["Google Cloud Skills Boost Profile URL"]);
+      } else {
+        handleNotFound();
+      }
+    })
+    .catch((error) => {
+      console.error("Error loading data:", error);
+    });
+}
+
+function handleNotFound() {
+  alert("Email not found!");
+}
+
+
+      function validateData(name,url) {
+        // const capitalize = (str, lower = false) =>
+        //   (lower ? str.toLowerCase() : str).replace(
+        //     /(?:^|\s|["'([{])+\S/g,
+        //     (match) => match.toUpperCase()
+        //   );
+        // const val = capitalize(name);
+
+        //check if the text is empty or not
+        if (name.trim() !== "") {
+          generatePDF(name,url);
+        } else {
+          console.log("somthing went wrong");
+        }
+      }
+    </script>
+    <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
+    <script src="./FileSaver.js"></script>
+    <script src="https://unpkg.com/@pdf-lib/fontkit@0.0.4"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
